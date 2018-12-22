@@ -8,3 +8,4 @@ With horse races, called TURF in France, you play against other player, cause it
 
 ## Dependencies
 - requests (pip install requests)
+- Tensorflow
