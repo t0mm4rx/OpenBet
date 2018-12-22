@@ -11,6 +11,7 @@ Here some data structures I have in mind...
 - A horse
 - A jockey
 - A handicap
+- A number
 
 ## A horse
 - Age
