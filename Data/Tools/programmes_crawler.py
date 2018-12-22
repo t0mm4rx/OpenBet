@@ -15,15 +15,18 @@ def write(date, content):
     with open('/home/tom/Documents/Programmation/Python/OpenBet/Data/Raw/programme_' + date + '.json', 'w+') as file:
         file.write(content)
 
-for i in range(186):
+# Download last x days
+DAYS_BEFORE = 365
+
+for i in range(DAYS_BEFORE):
     # We get today - i date, format ddmmYYYY
-    d = date.today() - (timedelta(i) + timedelta(180))
+    d = date.today() - (timedelta(i))
     d_str = d.strftime('%d%m%Y')
 
     url = URL + d_str
     r = requests.get(url)
     write(d_str, r.text)
 
-    print(str(math.floor(i / 365 * 100)) + "%")
+    print(str(math.floor(i / DAYS_BEFORE * 100)) + "%")
     # Don't try to reduce more, or you'll be banned of PMU servers !!
     time.sleep(10)

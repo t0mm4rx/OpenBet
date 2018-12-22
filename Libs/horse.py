@@ -4,6 +4,7 @@
         - sexe (int): 0 --> male, 1 --> female
         - musique (int[]): last positions
         - id (int): unique id
+        - from_id(id (int)): returns a Horse instance filled with data corresponding to given id
 """
 
 class Horse:
