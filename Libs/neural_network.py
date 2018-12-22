@@ -20,6 +20,7 @@ class NeuralNetwork:
         self.learning_rate = learning_rate
         self.session = None
         self.optimizer = None
+        self.forward = None
         self.init_tf()
 
     # Initializing tensorflow variables, weights and biases
@@ -38,13 +39,17 @@ class NeuralNetwork:
             self.bias[i] = tf.Variable(tf.zeros([self.n_hiddens[i]]), name="bias_" + str(i))
         self.bias[len(self.bias) - 1] = tf.Variable(tf.zeros([self.n_outputs]), name="bias_" + str(len(self.bias) - 1))
         self.session = tf.Session()
-        # Change here the optimizer later for experimentations
-        self.optimizer = tf.train.GradientDescentOptimizer(learning_rate=self.learning_rate)
+
         self.session.run(tf.global_variables_initializer())
         self.writer = tf.summary.FileWriter('Libs/LogsTF', self.session.graph)
 
+        # Creating tensors
+        self.forward = self.create_forward()
+        self.cost = cost = tf.reduce_mean(-self.Y * tf.log(self.forward) - (1 - self.Y) * tf.log(1 - self.forward))
+        # Change here the optimizer later for experimentations
+        self.optimizer = tf.train.GradientDescentOptimizer(learning_rate=self.learning_rate).minimize(self.cost)
 
-    def forward(self):
+    def create_forward(self):
         output = [None] * (len(self.n_hiddens) + 1)
         #first = tf.sigmoid(tf.matmul([input], self.weights[0]) + self.bias[0])
         output[0] = tf.sigmoid(tf.matmul(self.X,self.weights[0]) + self.bias[0])
@@ -60,28 +65,25 @@ class NeuralNetwork:
         return 0
 
     def train(self, input, output):
-        prediction = self.forward()
-        cost = tf.reduce_mean(-self.Y * tf.log(prediction) - (1 - self.Y) * tf.log(1 - prediction))
-        #print(self.session.run(cost))
-        self.session.run(self.optimizer.minimize(cost), feed_dict={self.X: [input], self.Y: [output]})
-        return self.session.run(cost, feed_dict={self.X: [input], self.Y: [output]})
+        self.session.run(self.optimizer, feed_dict={self.X: [input], self.Y: [output]})
+        return self.session.run(self.cost, feed_dict={self.X: [input], self.Y: [output]})
 
     def guess(self, input):
-        return self.session.run(self.forward(), feed_dict={self.X: [input]})
+        return self.session.run(self.forward, feed_dict={self.X: [input]})
 
 
 """
     Testing to resolve a xor to test the class
 """
 
-nn = NeuralNetwork(2, [3, 3], 1, learning_rate=0.1)
+nn = NeuralNetwork(2, [3], 1, learning_rate=0.1)
 
 x_training = [ [0.0, 0.0], [0.0, 1.0], [1.0, 0.0], [1.0, 1.0] ]
 y_training = [ [0.0], [1.0], [1.0], [0.0] ]
 
 average = 0
 
-for i in range(1000):
+for i in range(10000):
     average += nn.train(x_training[i % 4], y_training[i % 4])
     if (i % 4 == 3):
         print(average / 4)
