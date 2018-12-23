@@ -8,9 +8,10 @@ import json
 import time
 import requests
 
+PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 def write(name, content):
-    with open('/home/tom/Documents/Programmation/Python/OpenBet/Data/Races/race_' + name + '.json', 'w+') as file:
+    with open(PATH + '../Races/race_' + name + '.json', 'w+') as file:
         file.write(content)
 
 
@@ -19,8 +20,8 @@ TOTAL_RACES = 6398
 total = 0
 errors = 0
 
-for filename in os.listdir('/home/tom/Documents/Programmation/Python/OpenBet/Data/ProgrammesRaw'):
-    with open('/home/tom/Documents/Programmation/Python/OpenBet/Data/ProgrammesRaw/' + filename) as file:
+for filename in os.listdir(PATH + '../ProgrammesRaw'):
+    with open(PATH + '../ProgrammesRaw/' + filename) as file:
 
         date = filename.split('_')[1].split(".")[0]
 
@@ -42,7 +43,7 @@ for filename in os.listdir('/home/tom/Documents/Programmation/Python/OpenBet/Dat
                 if (race['discipline'] == "PLAT"):
                     if ("ordreArrivee" in race and "corde" in race and "distance" in race):
                         name = date + "_R" + str(event_n + 1) + "C" + str(race_n + 1)
-                        with open('/home/tom/Documents/Programmation/Python/OpenBet/Data/RacesRaw/race_' + name + '.json') as file:
+                        with open(PATH + '../RacesRaw/race_' + name + '.json') as file:
                             runners = json.loads(file.read())
                             if ("participants" in race and "participants" in runners):
                                 race["participants"] = runners["participants"]

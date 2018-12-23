@@ -10,16 +10,18 @@ import json
 import time
 import requests
 
+PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
+
 def write(name, content):
-    with open('/home/tom/Documents/Programmation/Python/OpenBet/Data/RacesRaw/race_' + name + '.json', 'w+') as file:
+    with open(PATH + '../RacesRaw/race_' + name + '.json', 'w+') as file:
         file.write(content)
 
 URL = "https://tablette.turfinfo.api.pmu.fr/rest/client/1/programme/{}/R{}/C{}/participants"
 error_number = 0
 race_number = 0
 
-for filename in os.listdir('/home/tom/Documents/Programmation/Python/OpenBet/Data/ProgrammesRaw'):
-     with open('/home/tom/Documents/Programmation/Python/OpenBet/Data/ProgrammesRaw/' + filename) as file:
+for filename in os.listdir(PATH + '../ProgrammesRaw'):
+     with open(PATH + '../ProgrammesRaw/' + filename) as file:
 
          date = filename.split('_')[1].split(".")[0]
 

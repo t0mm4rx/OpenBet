@@ -8,11 +8,13 @@ import requests
 from datetime import date, timedelta
 import time
 import math
+import os
 
+PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
 URL = "https://tablette.turfinfo.api.pmu.fr/rest/client/1/programme/"
 
 def write(date, content):
-    with open('/home/tom/Documents/Programmation/Python/OpenBet/Data/ProgrammesRaw/programme_' + date + '.json', 'w+') as file:
+    with open(PATH + '../ProgrammesRaw/programme_' + date + '.json', 'w+') as file:
         file.write(content)
 
 # Download last x days
