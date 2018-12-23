@@ -17,4 +17,4 @@ import data_fetcher
 #print(len(data_fetcher.get_horse_races(4)))
 #print(data_fetcher.get_horse_name(4))
 
-print(data_fetcher.get_race('01012018', 'R3C1'))
+#print(data_fetcher.get_race('01012018', 'R3C1'))

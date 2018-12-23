@@ -14,7 +14,7 @@ We have one neural network per runner, here are some ideas of inputs.
 - Favorite ?: "favoris", bool
 - Tendence ?: "indicateurTendance", +, -, or =
 - Blinker type: "oeilleres", need to establish a list of possible values
-- Winning amount: "gainsPlace", int
+- Terrain id, class, need to find a way to normalize it
 
 ## Things in the dataset I don't what it is
 - "rapport", float
@@ -22,6 +22,23 @@ We have one neural network per runner, here are some ideas of inputs.
 - "nombreIndicateurTendance", float
 - "engagement", bool
 - "driverChange", bool
+- "numPmu", int
+
+## Race data
+- Total money given: "montantTotalOffert", int
+- Money given to 5th: "montantOffert5eme", int
+- Money given to 4th: "montantOffert4eme", int
+- Money given to 3rd: "montantOffert3eme", int
+- Money given to 1st: "montantOffert1er", int
+- Number of runners: "nombreDeclaresPartants", int
+- Distance: "distance", int
+- Field type, "typePiste", class
+- Audience: "audience", class
+- Wind force: "forceVent", int
+- Temperature: "temperature", int
+- Period of the day: "nature", class
+- Side of the rope: "corde", binary class
 
 ## We need to calculate
 - Number of races ran with this jockey
+- Jockey score
