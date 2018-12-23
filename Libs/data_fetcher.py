@@ -21,6 +21,14 @@ def get_day_races(date):
                 result.append(json.loads(file.read()))
     return result
 
+def get_all_races():
+    result = []
+    for filename in os.listdir(PATH + '../Data/Races/'):
+        date = filename.split("_")[1]
+        name = filename.split("_")[2].split(".")[0]
+        result.append({ 'date': date, 'name': name })
+    return result
+
 
 #print(get_race("01012018", "R3C1"))
 #print(get_day_races("01012018"))

@@ -8,7 +8,7 @@ With horse races, called TURF in France, you play against other player, cause it
 
 ## How to download data ?
 Please run all scripts from root of the project, otherwise it may break dependencies.
-The dataset we get is an archive of all races of this year. The filenames are formatted this way : "date_RxCy" with date '%d%m%y', x the event number and y the race number.
+The dataset we get is an archive of all races of this year. The filenames are formatted this way : "race_date_RxCy" with date '%d%m%y', x the event number and y the race number.
 - First, in the "Data" folder, create 3 sub-subfolders : "ProgrammesRaw", "RacesRaw" and "Races"
 - All the data downloading and formatting tools are in the Data/Tools folder. We'll use thoses script to automaticly fetch data from PMU API.
 - Run first "programmes_crawler.py". It will download "programmes" (all races for given day) of the last year, about 100Mo and 1 hour download.
