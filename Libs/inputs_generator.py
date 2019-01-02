@@ -2,7 +2,8 @@
     This file contains functions to convert dataset data in raw values for neural network processing.
         - standing_to_output(standing (int)): convert the standing of the runner in output for the nn
         - normalize_[datatype] (data): transform a data type into a float in range [-1; 1]
-        - runner_to_input (runner (runner object)): takes as argument a runner object talen from the dataset, returns an array of normalized values ready to feed a nn
+        - runner_to_output (runner (runner object)); takes as argument a runner object taken from teh dataset, returns expected output
+        - runner_to_input (runner (runner object)): takes as argument a runner object taken from the dataset, returns an array of normalized values ready to feed a nn
 """
 
 import re
@@ -16,6 +17,12 @@ def standing_to_output(standing):
         return [0.0, 0.0, 1.0]
     else:
         return [0.0, 0.0, 0.0]
+
+def runner_to_output(runner):
+    if ("ordreArrivee" in runner):
+        return standing_to_output(runner["ordreArrivee"])
+    else:
+        return standing_to_output(10)
 
 def normalize_bool(value):
     if (value):
@@ -53,9 +60,9 @@ def normalize_trend(trend):
     if (trend == "+"):
         return 1.0
     elif (trend == "-"):
-        return -1.0
-    else:
         return 0.0
+    else:
+        return 0.5
 
 """
     Important function, defines every data used in the neural network.

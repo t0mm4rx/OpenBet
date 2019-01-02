@@ -18,3 +18,4 @@ The dataset we get is an archive of all races of this year. The filenames are fo
 ## Dependencies
 - requests (pip install requests)
 - Tensorflow
+- Matplotlib for graphing

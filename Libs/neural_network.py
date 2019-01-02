@@ -47,6 +47,7 @@ class NeuralNetwork:
         self.forward = self.create_forward()
         self.cost = cost = tf.reduce_mean(-self.Y * tf.log(self.forward) - (1 - self.Y) * tf.log(1 - self.forward))
         # Change here the optimizer later for experimentations
+        #self.optimizer = tf.train.GradientDescentOptimizer(learning_rate=self.learning_rate).minimize(self.cost)
         self.optimizer = tf.train.GradientDescentOptimizer(learning_rate=self.learning_rate).minimize(self.cost)
 
     def create_forward(self):
@@ -55,7 +56,6 @@ class NeuralNetwork:
         output[0] = tf.sigmoid(tf.matmul(self.X,self.weights[0]) + self.bias[0])
         for i in range(1, len(self.n_hiddens) + 1):
             output[i] = tf.sigmoid(tf.matmul(output[i - 1], self.weights[i]) + self.bias[i])
-
         return output[len(self.n_hiddens)]
 
     def load_weights(self, filename):
