@@ -2,4 +2,5 @@ Data/ProgrammesRaw
 Data/RacesRaw
 Data/Races
 Libs/LogsTF
+TFLogs/
 *.pyc
