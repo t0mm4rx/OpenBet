@@ -18,17 +18,20 @@ def write(date, content):
         file.write(content)
 
 # Download last x days
-DAYS_BEFORE = 365
+DAYS_BEFORE = 365 * 6
 
 for i in range(DAYS_BEFORE):
     # We get today - i date, format ddmmYYYY
     d = date.today() - (timedelta(i))
     d_str = d.strftime('%d%m%Y')
 
-    url = URL + d_str
-    r = requests.get(url)
-    write(d_str, r.text)
+    if (os.path.isfile(PATH + '../ProgrammesRaw/programme_' + d_str + ".json")):
+        pass
+    else:
+        url = URL + d_str
+        r = requests.get(url)
+        write(d_str, r.text)
 
-    print(str(math.floor(i / DAYS_BEFORE * 100)) + "%")
+    print(str(math.floor(i / DAYS_BEFORE * 10000) / 100) + "%")
     # Don't try to reduce more, or you'll be banned of PMU servers !!
-    time.sleep(10)
+    #time.sleep(1)
