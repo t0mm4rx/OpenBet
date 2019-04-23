@@ -1,0 +1,23 @@
+{
+  "race": "PUR-SANG",
+  "row": 9,
+  "handicap": 560,
+  "gains": 0,
+  "race_numbers": 2,
+  "driver": "DENIS VICENTE ARAUJO",
+  "driver_change": false,
+  "first_race": false,
+  "musique": "7p9p",
+  "standing": 2
+}
+
+{
+  "date": "22012017",
+  "name": "R5C7",
+  "nature": "SEMINOCTURNE",
+  "stadium": "SU1",
+  "distance": 1100,
+  "reward": 3582,
+  "corde": "CORDE_GAUCHE",
+  "runners": []
+}
