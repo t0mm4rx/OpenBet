@@ -8,4 +8,4 @@ data = np.random.normal(5, 1, 1000)
 #print(data)
 
 plt.hist(data)
-plt.savefig(PATH + "Outputs/hist.png", bins=20)
+plt.savefig(PATH + "Outputs/hist.png")
