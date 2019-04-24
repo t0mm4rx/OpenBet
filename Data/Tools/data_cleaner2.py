@@ -36,7 +36,8 @@ def process_course(course, reunion, course_n, date):
                                 if ("dernierRapportDirect" in p):
                                     odd = p["dernierRapportDirect"]["rapport"]
                                 else:
-                                    odd = 8.52 + (random.random() - 0.5) * 4
+                                    #odd = -1
+                                    odd = 20 + (random.random() - 0.5) * 8
 
                                 n_courses = 0
                                 if ("nombreCourses" in p):

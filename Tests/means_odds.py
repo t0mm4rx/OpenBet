@@ -17,7 +17,7 @@ with open(PATH + '../Data/dataset.json') as file:
 
     for r in a:
         for p in r['runners']:
-            if (p["standing"] == 1):
-                s += p["odd"]
-                n += 1
+            s += p["odd"]
+            n += 1
+
 print(s / n)

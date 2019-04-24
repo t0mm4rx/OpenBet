@@ -13,6 +13,8 @@ import data_converter
 features = []
 targets = []
 
+NAME = "model"
+
 with open(PATH + '../Data/dataset.json') as file:
     a = json.loads(file.read())
 
@@ -41,9 +43,9 @@ model.compile(optimizer='sgd',
 
 history = model.fit(np.array(features), np.array(targets), epochs=10, validation_split=0.2)
 
-print("Weights saved")
-model.save_weights(PATH + "../Models/model.h5")
+model.save(PATH + "../Models/" + NAME + ".h5")
+print("Model saved")
 
 plt.plot(history.history["accuracy"])
 plt.plot(history.history["val_accuracy"])
-plt.savefig("training.png")
+plt.savefig(PATH + "../Models/Graphs/training_" + NAME + ".png")
