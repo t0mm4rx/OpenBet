@@ -41,6 +41,8 @@ for i, j in enumerate(odds):
     b += 1
     hist.append(gains)
 
+print("Average odd", math.floor(betting_tools.get_gain(np.average(odds), True) * 100) / 100)
+
 plt.plot(hist)
 plt.title("Accuracy : {}%".format(math.floor(a / b * 10000) / 100))
 plt.savefig(PATH + "../Models/Simulations/simulation_" + NAME + ".png")

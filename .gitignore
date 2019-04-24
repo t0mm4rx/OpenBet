@@ -3,4 +3,5 @@ Data/RacesRaw
 Data/Races
 Libs/LogsTF
 TFLogs/
+Temp/
 *.pyc

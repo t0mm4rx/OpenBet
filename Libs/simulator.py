@@ -16,7 +16,7 @@ features = []
 targets = []
 odds = []
 
-MODEL = "weak_model"
+MODEL = "model_odds"
 
 with open(PATH + '../Data/dataset.json') as file:
     a = json.loads(file.read())
@@ -51,6 +51,8 @@ for i, j in enumerate(pred):
         gains += betting_tools.get_gain(odds[i], False)
     b += 1
     hist.append(gains)
+
+print("Average odd", math.floor(betting_tools.get_gain(np.average(odds), True) * 100) / 100)
 
 plt.plot(hist)
 plt.title("Accuracy : {}%".format(math.floor(a / b * 10000) / 100))

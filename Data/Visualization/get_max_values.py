@@ -13,6 +13,7 @@ max_handicap = 0
 max_races = 0
 max_gains = 0
 max_row = 0
+max_odd = 0
 
 # Race
 max_distance = 0
@@ -36,6 +37,8 @@ with open(PATH + "../dataset.json") as file:
                 max_races = runner['race_numbers']
             if (runner['row'] > max_row):
                 max_row = runner['row']
+            if (runner['odd'] > max_odd):
+                max_odd = runner['odd']
 
 print("Max handicap", max_handicap)
 print("Max gains", max_gains)
@@ -43,3 +46,4 @@ print("Max races", max_races)
 print("Max distance", max_distance)
 print("Max reward", max_reward)
 print("Max row", max_row)
+print("Max odd", max_odd)

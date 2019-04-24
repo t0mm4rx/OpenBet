@@ -53,6 +53,9 @@ def distance(distance):
 def reward(reward):
     return reward / 13860216
 
+def odd(odd):
+    return odd / 735.7
+
 def one_hot_encoding(value, values):
     arr = [0] * values
     arr[value] = 1
@@ -98,11 +101,24 @@ def runner_features(runner):
         musique(runner["musique"])
     ]))
 
+def runner_features_odds(runner):
+    return np.hstack(np.array([
+        np.array(race(runner["race"])),
+        np.array(row(runner["row"])),
+        handicap(runner["handicap"]),
+        races_number(runner["race_numbers"]),
+        driver_change(runner["driver_change"]),
+        first_race(runner["first_race"]),
+        musique(runner["musique"]),
+        odd(runner['odd'])
+    ]))
+
+
 def features(race):
     r = []
     for runner in race["runners"]:
-        r.append(runner_features(runner))
- 
+        r.append(runner_features_odds(runner))
+
     return np.hstack(np.array([
         nature(race["nature"]),
         stadium(race["stadium"]),
