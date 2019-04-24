@@ -1,6 +1,8 @@
 import os
 import math
 import json
+import numpy as np
+import random
 
 PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
 
@@ -9,6 +11,9 @@ total = len(os.listdir(PATH + "../ProgrammesRaw/"))
 
 n = 0
 errors = 0
+
+a = 0
+b = 0
 
 races = []
 
@@ -26,6 +31,12 @@ def process_course(course, reunion, course_n, date):
                     if ("statut" in p):
                         if (p["statut"] == "PARTANT"):
                             if ("race" in p and "placeCorde" in p and "driver" in p and "driverChange" in p and "indicateurInedit" in p and "musique" in p and "handicapPoids" in p and "ordreArrivee" in p):
+
+                                #odd = 8.52
+                                if ("dernierRapportDirect" in p):
+                                    odd = p["dernierRapportDirect"]["rapport"]
+                                else:
+                                    odd = 8.52 + (random.random() - 0.5) * 4
 
                                 n_courses = 0
                                 if ("nombreCourses" in p):
@@ -46,7 +57,8 @@ def process_course(course, reunion, course_n, date):
                                     'driver_change': p["driverChange"],
                                     'first_race': p["indicateurInedit"],
                                     'musique': p["musique"],
-                                    'standing': p["ordreArrivee"]
+                                    'standing': p["ordreArrivee"],
+                                    'odd': odd
                                 })
 
                 if ("corde" in course and "montantTotalOffert" in course and "nature" in reunion and "hippodrome" in reunion and "distance" in course):

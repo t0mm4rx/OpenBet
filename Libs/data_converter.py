@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 races = ["PUR-SANG", "ANGLO ARABE DE COMPLEMENT", "ANGLO ARABE", "INCONNU", "AQPS", "ARABE", "CHEVAL DE SELLE", "CHEVAL DE SELLE FRANCAIS", "TROTTEUR FRANCAIS"]
 natures = ['DIURNE', 'SEMINOCTURNE', 'NOCTURNE']
@@ -80,3 +81,33 @@ def corde(corde):
 
 def stadium(stadium):
     return one_hot_encoding(stadiums.index(stadium), len(stadiums))
+
+def targets(race):
+    for i, runner in enumerate(race["runners"]):
+        if (runner["standing"] == 1):
+            return one_hot_encoding(i, len(race["runners"]))
+
+def runner_features(runner):
+    return np.hstack(np.array([
+        np.array(race(runner["race"])),
+        np.array(row(runner["row"])),
+        handicap(runner["handicap"]),
+        races_number(runner["race_numbers"]),
+        driver_change(runner["driver_change"]),
+        first_race(runner["first_race"]),
+        musique(runner["musique"])
+    ]))
+
+def features(race):
+    r = []
+    for runner in race["runners"]:
+        r.append(runner_features(runner))
+ 
+    return np.hstack(np.array([
+        nature(race["nature"]),
+        stadium(race["stadium"]),
+        distance(race["distance"]),
+        reward(race["reward"]),
+        corde(race["corde"]),
+        np.hstack(np.array(r))
+    ]))
