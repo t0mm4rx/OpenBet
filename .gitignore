@@ -4,4 +4,5 @@ Data/Races
 Libs/LogsTF
 TFLogs/
 Temp/
+*.h5
 *.pyc

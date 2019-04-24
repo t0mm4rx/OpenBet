@@ -16,26 +16,20 @@ features = []
 targets = []
 odds = []
 
-MODEL = "model_odds"
+MODEL = "model_newtraining"
 
-with open(PATH + '../Data/dataset.json') as file:
-    a = json.loads(file.read())
+features, targets, odds = data_converter.get_dataset()
 
-    for r in a:
-        if (len(r['runners']) == 10):
-            features.append(np.array(data_converter.features(r)))
-            targets.append(np.array(data_converter.targets(r)))
-            for p in r["runners"]:
-                if (p["standing"] == 1):
-                    odds.append(p['odd'])
-
-
-print("Data loaded")
+print("Data loaded,", len(features), "races")
 model = tf.keras.models.load_model(PATH + "../Models/" + MODEL + ".h5")
 print("Model loaded")
 
 pred = model.predict_classes(np.array(features))
 #print(pred)
+print("Predictions made")
+
+plt.hist(pred)
+plt.savefig(PATH + "../Temp/dist_bets.png")
 
 gains = 0
 
